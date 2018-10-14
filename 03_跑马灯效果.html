@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.倒入vue包 -->
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <!-- 2.创建一个要控制的区域 -->
+    <div id="app">
+        <input type="button" value="浪起来" @click="lang">
+        <input type="button" value="低调" @click="stop">
+        <h4>{{msg}}</h4>
+    </div>
+</body>
+
+    <script>
+        //注意；在vm实例中，如果想要获取data上的数据，或者想要调用methos中的方法，必须通过this.数据名 或 this.方法名来进行访问，这里的this 就等于我们new出来的vm 实例对象
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                msg: '猥琐发育，别浪～～！',
+                intervalId:null //在data上定义 定时器Id
+            },
+            methods:{
+                lang() {
+                    console.log(this.msg)
+                    
+                    if(this.intervalId != null) return;
+                    this.intervalId = setInterval(() => {
+                        //获取到头的第一个字符
+                        var start = this.msg.substring(0,1)
+                        // 获取到后面的所有字符
+                        var end = this.msg.substring(1)
+                        // 重新拼接到新的字符串，并附值到 this.msg
+
+                        this.msg = end + start
+                    },400)
+
+                    //注意：vm实例，会监听自己身上的data 中所有数据的变化 ，只要数据一发生变化，就会自动把 最新的数据，从data上同步到页面中去；【好处：程序员只需要关系数据,不需要考虑重新渲染dom页面】
+                },
+                stop() {//停止定时器
+                    clearInterval(this.intervalId)
+                    // 每当清楚了定时器之后，需要重新把定时器重制为null
+                    this.intervalId = null;
+                }
+            }
+        })
+
+        // 分析：
+        // 1.给 【浪起来】 按钮，绑定一个点击事件 v-on @
+        // 2.在按钮灯事件处理函数中，雌鹅相关灯业务逻辑代码：拿到msg字符串，然后调用字符串灯 substring 来进行字符串灯截取操作，吧 第一个截取出来放到最后面
+        // 3.为了实习点击按钮，自动截取的功能，需要把2步骤放到定时器里面
+    </script>
+
+</html>

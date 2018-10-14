@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" method="get">
+        <input type="text" name="abc" id="">
+        <input type="button" value="提交">
+    </form>
+</body>
+
+<script>
+    function abc(data) {
+        console.log(data);
+    }
+</script>
+<!-- jsonp 解决数据跨域问题 -->
+<!-- 引入外部的js服务 利用 abc=abc的 返回会调使用本地的abc函数 获取数据并输出 -->
+<script src="http://127.0.0.1:3000/index?abc=abc"></script>
+
+</html>
