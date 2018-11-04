@@ -1,3 +1,9 @@
+/*
+ * @Author: yhf 
+ * @Date: 2018-10-27 16:16:25 
+ * @Last Modified by:   yhf 
+ * @Last Modified time: 2018-10-27 16:16:25 
+ */
 // 1. 创建 express 服务器
 const express = require('express')
 
@@ -16,6 +22,11 @@ app.all('/api/*', (req, res, next) => {
   res.setHeader('Content-Type', 'application/json;charset=utf-8');
   next();
 });
+
+// 配置静态资源库
+app.use('/public', express.static('./public'));
+
+
 // 注册解析 表单数据的 body-parser
 const bodyParser = require('body-parser')
 // 注册 body-parser
