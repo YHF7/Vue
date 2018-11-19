@@ -12,6 +12,8 @@ import ajax from './config/ajax'
 
 // 自定义less / js
 import './style/common'
+
+// 自定义屏幕自适应改变
 import './config/rem'
 
 Vue.use(VueRouter)
